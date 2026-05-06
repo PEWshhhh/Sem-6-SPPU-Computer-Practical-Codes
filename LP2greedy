@@ -1,0 +1,645 @@
+# selection SORT
+
+
+n = int(input("Enter number of elements: "))
+
+arr = []
+
+for i in range(n):
+
+    value = int(input("Enter element: "))
+    arr.append(value)
+
+print("\nOriginal Array:")
+print(arr)
+
+for i in range(n):
+
+    min_index = i
+
+    for j in range(i + 1, n):
+
+        if arr[j] < arr[min_index]:
+            min_index = j
+
+    temp = arr[i]
+    arr[i] = arr[min_index]
+    arr[min_index] = temp
+
+    print("After Pass", i + 1, ":", arr)
+
+print("\nSorted Array:")
+print(arr)
+
+
+# ---------------- THEORY ----------------
+# Selection Sort is a greedy sorting algorithm.
+# It repeatedly finds the minimum element
+# from the unsorted part of the array
+# and places it at the correct position.
+#
+# Greedy Idea:
+# At every step, choose the smallest element available.
+#
+# Time Complexity:
+# Best Case    : O(n^2)
+# Average Case : O(n^2)
+# Worst Case   : O(n^2)
+#
+# Space Complexity:
+# O(1)
+
+
+# ---------------- ALGORITHM ----------------
+# Step 1: Start from first element.
+# Step 2: Assume current element is minimum.
+# Step 3: Traverse remaining unsorted array.
+# Step 4: Find actual minimum element.
+# Step 5: Swap minimum element with current position.
+# Step 6: Move to next position.
+# Step 7: Repeat until array becomes sorted.
+
+
+# ---------------- EXPLANATION ----------------
+# Outer loop:
+# Used to move current position from left to right.
+#
+# Inner loop:
+# Used to find minimum element in unsorted part.
+#
+# min_index:
+# Stores index of smallest element.
+#
+# Swap:
+# Places smallest element at correct position.
+#
+# After every pass:
+# One element gets fixed in correct sorted position.
+
+
+# ---------------- VIVA QUESTIONS ----------------
+# Q1. What is Selection Sort?
+# Selection Sort repeatedly selects the minimum element
+# and places it at correct position.
+#
+# Q2. Why is Selection Sort called greedy?
+# Because it chooses the best immediate option,
+# which is the minimum element.
+#
+# Q3. How many swaps happen in one pass?
+# Only one swap.
+#
+# Q4. Is Selection Sort stable?
+# No
+#
+# Q5. What is the time complexity?
+# O(n^2)
+#
+# Q6. What is the main operation?
+# Finding minimum element and swapping.
+
+
+
+
+# Minimum Spanning Tree
+
+vertices = int(input("Enter number of vertices: "))
+edges_count = int(input("Enter number of edges: "))
+
+edges = []
+
+print("Enter edges in format: source destination weight")
+
+for i in range(edges_count):
+
+    u = int(input("Enter source vertex: "))
+    v = int(input("Enter destination vertex: "))
+    w = int(input("Enter weight: "))
+
+    edges.append((w, u, v))
+
+edges.sort()
+
+parent = []
+
+for i in range(vertices):
+    parent.append(i)
+
+
+def find(i):
+
+    while parent[i] != i:
+        i = parent[i]
+
+    return i
+
+
+def union(a, b):
+
+    parent_a = find(a)
+    parent_b = find(b)
+
+    parent[parent_a] = parent_b
+
+
+print("\nEdges in Minimum Spanning Tree:")
+
+count = 0
+index = 0
+total_cost = 0
+
+while count < vertices - 1:
+
+    weight, u, v = edges[index]
+    index = index + 1
+
+    parent_u = find(u)
+    parent_v = find(v)
+
+    if parent_u != parent_v:
+
+        print(u, "--", v, "=", weight)
+
+        total_cost = total_cost + weight
+
+        union(parent_u, parent_v)
+
+        count = count + 1
+
+print("\nTotal Cost of MST:", total_cost)
+
+
+# ---------------- THEORY ----------------
+# Minimum Spanning Tree (MST) is a tree that:
+# 1. Connects all vertices
+# 2. Has no cycles
+# 3. Has minimum total edge weight
+#
+# Kruskal's Algorithm is a greedy algorithm.
+# It repeatedly selects the edge with minimum weight
+# while avoiding cycles.
+#
+# Time Complexity:
+# O(E log E)
+
+
+# ---------------- ALGORITHM ----------------
+# Step 1: Input vertices and edges.
+# Step 2: Sort all edges by weight.
+# Step 3: Select minimum weight edge.
+# Step 4: Check whether cycle is formed.
+# Step 5: If no cycle, include edge in MST.
+# Step 6: Repeat until V-1 edges are selected.
+
+
+# ---------------- EXPLANATION ----------------
+# edges:
+# Stores all graph edges with weights.
+#
+# sort():
+# Arranges edges from smallest to largest weight.
+#
+# find():
+# Finds parent of a vertex.
+#
+# union():
+# Connects two sets.
+#
+# Cycle Check:
+# If parents are same, cycle will form.
+#
+# total_cost:
+# Stores total weight of MST.
+
+
+# ---------------- VIVA QUESTIONS ----------------
+# Q1. What is MST?
+# Minimum set of edges connecting all vertices.
+#
+# Q2. Why is Kruskal Algorithm greedy?
+# Because it selects minimum weight edge first.
+#
+# Q3. Why are cycles avoided?
+# MST should not contain cycles.
+#
+# Q4. How many edges are present in MST?
+# V - 1 edges.
+#
+# Q5. What is the time complexity?
+# O(E log E)
+
+
+
+
+#Dijkstra's Minimal Spanning Tree Algorithm
+
+
+
+INF = 999999
+
+vertices = int(input("Enter number of vertices: "))
+
+graph = []
+
+print("Enter adjacency matrix:")
+
+for i in range(vertices):
+
+    row = []
+
+    for j in range(vertices):
+
+        value = int(input())
+
+        row.append(value)
+
+    graph.append(row)
+
+visited = []
+distance = []
+
+for i in range(vertices):
+
+    visited.append(0)
+    distance.append(INF)
+
+source = int(input("Enter source vertex: "))
+
+distance[source] = 0
+
+for i in range(vertices):
+
+    min_distance = INF
+    min_index = -1
+
+    for j in range(vertices):
+
+        if visited[j] == 0 and distance[j] < min_distance:
+
+            min_distance = distance[j]
+            min_index = j
+
+    visited[min_index] = 1
+
+    for k in range(vertices):
+
+        if graph[min_index][k] != 0 and visited[k] == 0:
+
+            new_distance = distance[min_index] + graph[min_index][k]
+
+            if new_distance < distance[k]:
+
+                distance[k] = new_distance
+
+print("\nShortest Distances:")
+
+for i in range(vertices):
+
+    print("Vertex", i, "=", distance[i])
+
+
+
+# ---------------- THEORY ----------------
+# Dijkstra's Algorithm is a greedy algorithm.
+# It finds the shortest path from a source vertex
+# to all other vertices in a graph.
+#
+# Greedy Idea:
+# Select the nearest unvisited vertex each time.
+#
+# Time Complexity:
+# O(V^2)
+#
+# Note:
+# Dijkstra's Algorithm does not work
+# with negative edge weights.
+
+
+# ---------------- ALGORITHM ----------------
+# Step 1: Input graph using adjacency matrix.
+# Step 2: Initialize all distances as infinity.
+# Step 3: Set source vertex distance as 0.
+# Step 4: Select nearest unvisited vertex.
+# Step 5: Mark it as visited.
+# Step 6: Update distances of adjacent vertices.
+# Step 7: Repeat until all vertices are visited.
+
+
+# ---------------- EXPLANATION ----------------
+# graph:
+# Stores adjacency matrix of graph.
+#
+# visited:
+# Tracks visited vertices.
+#
+# distance:
+# Stores shortest distance from source vertex.
+#
+# min_distance:
+# Finds smallest distance among unvisited vertices.
+#
+# Relaxation:
+# Updating shorter path if found.
+#
+# source:
+# Starting vertex for shortest path calculation.
+
+
+# ---------------- VIVA QUESTIONS ----------------
+# Q1. What does Dijkstra's Algorithm find?
+# Shortest path from source vertex.
+#
+# Q2. Why is Dijkstra greedy?
+# Because it selects nearest unvisited vertex first.
+#
+# Q3. Can Dijkstra work with negative weights?
+# No
+#
+# Q4. What is the time complexity?
+# O(V^2)
+#
+# Q5. Where is Dijkstra used?
+# GPS navigation and network routing.
+
+
+#Kruskal's Minimal Spanning Tree Algorithm
+
+vertices = int(input("Enter number of vertices: "))
+edges_count = int(input("Enter number of edges: "))
+
+edges = []
+
+print("Enter edges in format: source destination weight")
+
+for i in range(edges_count):
+
+    u = int(input("Enter source vertex: "))
+    v = int(input("Enter destination vertex: "))
+    w = int(input("Enter weight: "))
+
+    edges.append((w, u, v))
+
+edges.sort()
+
+parent = []
+
+for i in range(vertices):
+    parent.append(i)
+
+
+def find(i):
+
+    while parent[i] != i:
+        i = parent[i]
+
+    return i
+
+
+def union(a, b):
+
+    parent_a = find(a)
+    parent_b = find(b)
+
+    parent[parent_a] = parent_b
+
+
+print("\nEdges in Minimum Spanning Tree:")
+
+count = 0
+index = 0
+total_cost = 0
+
+while count < vertices - 1:
+
+    weight, u, v = edges[index]
+    index = index + 1
+
+    parent_u = find(u)
+    parent_v = find(v)
+
+    if parent_u != parent_v:
+
+        print(u, "--", v, "=", weight)
+
+        total_cost = total_cost + weight
+
+        union(parent_u, parent_v)
+
+        count = count + 1
+
+print("\nTotal Cost of MST:", total_cost)
+
+
+# ---------------- THEORY ----------------
+# Kruskal's Algorithm is a greedy algorithm
+# used to find Minimum Spanning Tree (MST).
+#
+# Minimum Spanning Tree:
+# 1. Connects all vertices
+# 2. Has no cycles
+# 3. Has minimum total edge weight
+#
+# Greedy Idea:
+# Always select the edge with minimum weight.
+#
+# Time Complexity:
+# O(E log E)
+# where E is number of edges.
+
+
+# ---------------- ALGORITHM ----------------
+# Step 1: Input vertices and edges.
+# Step 2: Store all edges with weights.
+# Step 3: Sort edges in increasing order.
+# Step 4: Select smallest edge.
+# Step 5: Check whether cycle is formed.
+# Step 6: If cycle is not formed,
+#         include edge in MST.
+# Step 7: Repeat until V-1 edges are selected.
+
+
+# ---------------- EXPLANATION ----------------
+# edges:
+# Stores all graph edges.
+#
+# sort():
+# Sorts edges according to weight.
+#
+# parent:
+# Stores parent of each vertex.
+#
+# find():
+# Finds parent of vertex.
+#
+# union():
+# Connects two sets together.
+#
+# Cycle Check:
+# If parents are same,
+# cycle will be formed.
+#
+# total_cost:
+# Stores total weight of MST.
+
+
+# ---------------- VIVA QUESTIONS ----------------
+# Q1. What is MST?
+# MST is minimum set of edges
+# connecting all vertices.
+#
+# Q2. Why is Kruskal greedy?
+# Because it selects minimum weight edge first.
+#
+# Q3. Why are cycles avoided?
+# MST should not contain cycles.
+#
+# Q4. How many edges are present in MST?
+# V - 1 edges.
+#
+# Q5. What is the time complexity?
+# O(E log E)
+#
+# Q6. Which data structure is used?
+# Disjoint Set / Union Find.
+
+
+
+
+# ---------------- COMMON THEORY OF GREEDY ALGORITHMS ----------------
+#
+# A Greedy Algorithm solves a problem step by step
+# by choosing the best immediate option at each stage.
+#
+# It does not think about future consequences.
+#
+# Main Idea:
+# "Choose the locally best solution."
+#
+# Characteristics of Greedy Algorithms:
+# 1. Simple and easy to implement
+# 2. Faster than many other algorithms
+# 3. May not always give optimal solution
+# 4. Builds solution step by step
+#
+# Applications of Greedy Algorithms:
+# 1. Selection Sort
+# 2. Dijkstra's Algorithm
+# 3. Prim's Algorithm
+# 4. Kruskal's Algorithm
+# 5. Job Scheduling
+# 6. Huffman Coding
+#
+# Advantages:
+# 1. Easy to understand
+# 2. Less time complexity
+# 3. Efficient for optimization problems
+#
+# Disadvantages:
+# 1. Does not always guarantee best solution
+# 2. Sometimes depends only on local optimum
+#
+
+
+
+# ---------------- SINGLE SOURCE SHORTEST PATH PROBLEM ----------------
+#
+# Single Source Shortest Path Problem means
+# finding shortest distance from one source vertex
+# to all other vertices in a graph.
+#
+# Goal:
+# Find minimum cost path from source node.
+#
+# Common Algorithms:
+# 1. Dijkstra's Algorithm
+# 2. Bellman Ford Algorithm
+#
+# Greedy Idea:
+# Choose nearest vertex first.
+#
+# Applications:
+# 1. GPS navigation
+# 2. Google Maps
+# 3. Network routing
+# 4. Transportation systems
+#
+# Advantages:
+# 1. Finds shortest path efficiently
+# 2. Useful in real-world navigation systems
+#
+# Limitation:
+# Dijkstra does not work with negative edge weights.
+
+
+# ---------------- JOB SCHEDULING PROBLEM ----------------
+#
+# Job Scheduling Problem is used to schedule jobs
+# to maximize total profit within deadlines.
+#
+# Each job has:
+# 1. Deadline
+# 2. Profit
+#
+# Goal:
+# Complete jobs in such a way
+# that maximum profit is obtained.
+#
+# Greedy Idea:
+# Select jobs with highest profit first.
+#
+# Steps:
+# 1. Sort jobs according to profit.
+# 2. Select highest profit job first.
+# 3. Assign job before its deadline.
+#
+# Applications:
+# 1. CPU scheduling
+# 2. Project management
+# 3. Task scheduling
+# 4. Resource allocation
+#
+# Advantages:
+# 1. Maximizes profit
+# 2. Efficient scheduling
+#
+# Time Complexity:
+# O(n log n)
+
+
+# ---------------- PRIM'S MINIMUM SPANNING TREE ALGORITHM ----------------
+#
+# Prim's Algorithm is a greedy algorithm
+# used to find Minimum Spanning Tree (MST).
+#
+# Minimum Spanning Tree:
+# 1. Connects all vertices
+# 2. Has no cycles
+# 3. Has minimum total edge weight
+#
+# Greedy Idea:
+# Select minimum weight edge connected
+# to current tree.
+#
+# Steps:
+# 1. Start from any vertex.
+# 2. Select minimum edge connected to tree.
+# 3. Add new vertex to tree.
+# 4. Repeat until all vertices are connected.
+#
+# Characteristics:
+# 1. Starts from a single vertex
+# 2. Expands MST step by step
+# 3. Better for dense graphs
+#
+# Applications:
+# 1. Network design
+# 2. Cable connections
+# 3. Electrical wiring
+# 4. Road construction
+#
+# Time Complexity:
+# O(V^2)
+#
+# Difference from Kruskal:
+# Prim starts from vertex.
+# Kruskal starts from edges.

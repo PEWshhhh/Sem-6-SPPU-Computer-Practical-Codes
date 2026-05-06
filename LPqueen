@@ -1,0 +1,358 @@
+def printBoard(board, n):
+
+    print("\nSolution:\n")
+
+    for i in range(n):
+
+        for j in range(n):
+
+            if board[i][j] == 1:
+                print("Q", end=" ")
+
+            else:
+                print(".", end=" ")
+
+        print()
+
+
+# Function to check safe position
+def isSafe(row, col, leftRow, upperDiagonal, lowerDiagonal, n):
+
+    if leftRow[col] == 1:
+        return False
+
+    if lowerDiagonal[row + col] == 1:
+        return False
+
+    if upperDiagonal[n - 1 + col - row] == 1:
+        return False
+
+    return True
+
+
+# Backtracking function
+def solve(board, row, n, leftRow, upperDiagonal, lowerDiagonal):
+
+    # All queens placed
+    if row == n:
+        printBoard(board, n)
+        return True
+
+    # Try all columns
+    for col in range(n):
+
+        # Check safe position
+        if isSafe(row, col, leftRow, upperDiagonal, lowerDiagonal, n):
+
+            # Place queen
+            board[row][col] = 1
+
+            # Mark column and diagonals
+            leftRow[col] = 1
+            lowerDiagonal[row + col] = 1
+            upperDiagonal[n - 1 + col - row] = 1
+
+            # Move to next row
+            if solve(board, row + 1, n, leftRow, upperDiagonal, lowerDiagonal):
+                return True
+
+            # Backtracking
+            board[row][col] = 0
+
+            leftRow[col] = 0
+            lowerDiagonal[row + col] = 0
+            upperDiagonal[n - 1 + col - row] = 0
+
+    return False
+
+
+# ---------------- MAIN PROGRAM ----------------
+
+# Dynamic input
+n = int(input("Enter number of queens: "))
+
+# Create board dynamically
+board = []
+
+for i in range(n):
+
+    row = []
+
+    for j in range(n):
+        row.append(0)
+
+    board.append(row)
+
+# Arrays for Branch and Bound
+leftRow = [0] * n
+upperDiagonal = [0] * (2 * n - 1)
+lowerDiagonal = [0] * (2 * n - 1)
+
+# Solve problem
+result = solve(board, 0, n, leftRow, upperDiagonal, lowerDiagonal)
+
+if result == False:
+    print("No solution exists")
+
+
+
+
+
+# ---------------- DETAILED THEORY ----------------
+
+# Artificial Intelligence:
+# Artificial Intelligence (AI) is a branch of computer science
+# where machines are designed to perform tasks that normally
+# require human intelligence.
+
+# Constraint Satisfaction Problem (CSP):
+# A CSP is a problem where a solution must satisfy
+# a set of constraints or rules.
+
+# Examples of CSP:
+# 1. N-Queens Problem
+# 2. Sudoku
+# 3. Graph Coloring
+# 4. Timetable Scheduling
+
+# N-Queens Problem:
+# The N-Queens problem is a classic CSP problem.
+# The objective is to place N queens on an N x N chessboard
+# such that no queen attacks another queen.
+
+# Rules of N-Queens:
+# 1. Only one queen can be placed in one row.
+# 2. Only one queen can be placed in one column.
+# 3. No two queens can be placed on same diagonal.
+
+# Queen Movement in Chess:
+# A queen can move:
+# 1. Horizontally
+# 2. Vertically
+# 3. Diagonally
+
+# Therefore, while placing queens,
+# all these directions must be checked.
+
+# State Space Tree:
+# The problem can be represented using a state space tree.
+# Each level represents a row of chessboard.
+# Each branch represents a possible column position.
+
+# Backtracking:
+# Backtracking is a recursive problem-solving technique.
+
+# Working of Backtracking:
+# 1. Choose a possible solution.
+# 2. Check whether it is valid.
+# 3. If valid, continue further.
+# 4. If invalid, go back and try another option.
+
+# In N-Queens:
+# If a queen placement causes conflict later,
+# the queen is removed and another position is tried.
+
+# Advantages of Backtracking:
+# 1. Simple and easy to implement.
+# 2. Reduces unnecessary computations.
+# 3. Finds valid solution systematically.
+
+# Disadvantages of Backtracking:
+# 1. Recursive calls increase for large N.
+# 2. Time complexity is high.
+
+# Branch and Bound:
+# Branch and Bound is an optimization technique.
+
+# Branch:
+# Trying different possible choices.
+
+# Bound:
+# Avoiding paths that cannot produce valid solution.
+
+# In N-Queens:
+# Arrays are used to quickly check:
+# 1. Occupied columns
+# 2. Occupied upper diagonals
+# 3. Occupied lower diagonals
+
+# This reduces repeated checking
+# and improves execution speed.
+
+# Arrays Used:
+# leftRow:
+# Stores whether a column already contains queen.
+
+# upperDiagonal:
+# Stores occupied upper diagonals.
+
+# lowerDiagonal:
+# Stores occupied lower diagonals.
+
+# Why Branch and Bound is Faster:
+# Instead of scanning entire chessboard,
+# arrays directly tell whether position is safe.
+
+# Recursion:
+# Recursion means a function calling itself.
+
+# In N-Queens:
+# Recursive function places queens row by row.
+
+# Base Condition:
+# When row becomes equal to N,
+# it means all queens are placed successfully.
+
+# Time Complexity:
+# Worst case time complexity is approximately O(N!)
+
+# Space Complexity:
+# O(N^2) for chessboard storage.
+
+# Applications of N-Queens:
+# 1. Artificial Intelligence
+# 2. Game development
+# 3. Resource allocation
+# 4. Scheduling problems
+
+# Graph Coloring:
+# Graph coloring is another CSP problem.
+
+# Objective:
+# Assign colors to graph vertices such that
+# adjacent vertices do not have same color.
+
+# Applications of Graph Coloring:
+# 1. Timetable scheduling
+# 2. Register allocation in compiler
+# 3. Map coloring
+# 4. Frequency assignment
+
+# Difference Between N-Queens and Graph Coloring:
+# N-Queens:
+# Place queens safely on chessboard.
+
+# Graph Coloring:
+# Color graph nodes safely.
+
+# Similarity:
+# Both are Constraint Satisfaction Problems.
+
+
+# ---------------- ALGORITHM ----------------
+
+# Step 1:
+# Read value of N.
+
+# Step 2:
+# Create empty chessboard.
+
+# Step 3:
+# Start placing queen from first row.
+
+# Step 4:
+# Check whether current position is safe.
+
+# Step 5:
+# If safe, place queen.
+
+# Step 6:
+# Move to next row recursively.
+
+# Step 7:
+# If no safe position exists,
+# perform backtracking.
+
+# Step 8:
+# Continue until all queens are placed.
+
+# Step 9:
+# Print final solution.
+
+
+# ---------------- VIVA QUESTIONS ----------------
+
+# Q1. What is Artificial Intelligence?
+# AI is simulation of human intelligence by machines.
+
+# Q2. What is Constraint Satisfaction Problem?
+# A problem where constraints must be satisfied.
+
+# Q3. What is N-Queens problem?
+# Place N queens safely on chessboard.
+
+# Q4. What is Backtracking?
+# Going back when current solution fails.
+
+# Q5. What is Branch and Bound?
+# Avoiding invalid paths early.
+
+# Q6. Why recursion is used?
+# To solve problem row by row automatically.
+
+# Q7. Why diagonals are checked?
+# Queens attack diagonally.
+
+# Q8. What is state space tree?
+# A tree representing all possible solutions.
+
+# Q9. What is time complexity?
+# Approximately O(N!)
+
+# Q10. What are applications of N-Queens?
+# AI, scheduling, game development etc.
+
+
+
+# ---------------- FUNCTION EXPLANATION ----------------
+
+# printBoard():
+# This function prints the final chessboard.
+# Q represents queen.
+# . represents empty position.
+
+# isSafe():
+# This function checks whether queen can be placed safely.
+# It checks:
+# 1. Column
+# 2. Upper diagonal
+# 3. Lower diagonal
+
+# solve():
+# This is the main recursive backtracking function.
+# It places queens row by row.
+
+
+# ---------------- BACKTRACKING EXPLANATION ----------------
+
+# Step 1:
+# Place queen in a safe position.
+
+# Step 2:
+# Move to next row using recursion.
+
+# Step 3:
+# If no safe position exists in future rows,
+# remove previously placed queen.
+
+# Step 4:
+# Try another column.
+
+# This process is called Backtracking.
+
+
+# ---------------- BRANCH AND BOUND EXPLANATION ----------------
+
+# Branch:
+# Trying different possible columns for queen placement.
+
+# Bound:
+# Avoiding invalid positions early.
+
+# Arrays used:
+# leftRow -> checks occupied columns
+# upperDiagonal -> checks occupied upper diagonals
+# lowerDiagonal -> checks occupied lower diagonals
+
+# These arrays make checking faster
+# instead of scanning whole chessboard.
