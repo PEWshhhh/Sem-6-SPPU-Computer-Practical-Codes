@@ -90,3 +90,67 @@ while True:
 
     else:
         print("Invalid Choice")
+
+
+
+
+
+
+
+
+
+        
+
+#         /*
+# THEORY
+
+# Bubble Sort is a simple sorting algorithm.
+# It compares adjacent elements and swaps them if they are in the wrong order.
+
+# Largest elements move towards the end in every pass,
+# similar to bubbles rising upward.
+
+# Time Complexity:
+# O(n²)
+
+# Advantages:
+# 1. Easy to understand
+# 2. Easy to implement
+
+# Disadvantages:
+# 1. Slow for large datasets
+# 2. More comparisons and swaps
+
+
+# VIVA QUESTIONS AND ANSWERS
+
+# 1) What is Bubble Sort?
+# Bubble Sort is a sorting technique that repeatedly compares and swaps adjacent elements.
+
+# 2) Why is it called Bubble Sort?
+# Because larger elements move to the end like bubbles rising in water.
+
+# 3) What is the time complexity of Bubble Sort?
+# O(n²)
+
+# 4) Is Bubble Sort stable?
+# Yes, Bubble Sort is a stable sorting algorithm.
+
+# 5) Which concept is used in Bubble Sort?
+# Swapping of adjacent elements using loops.
+
+# 6) What is the role of temp variable?
+# It temporarily stores a value during swapping.
+
+# 7) How many loops are used in Bubble Sort?
+# Two nested loops.
+
+# 8) Which language is used here?
+# Apex language in Salesforce.
+
+# 9) What is List<Integer> in Apex?
+# It is a collection used to store integer values.
+
+# 10) What does System.debug do?
+# It prints output in Salesforce debug logs.
+# */

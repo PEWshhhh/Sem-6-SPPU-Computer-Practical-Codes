@@ -1,0 +1,247 @@
+# Assignment 6
+# Elementary Medical Diagnosis Chatbot
+
+# Function for taking only yes/no input
+def get_answer(question):
+
+    while True:
+
+        answer = input(question).strip().lower()
+
+        if answer == "yes" or answer == "no":
+            return answer == "yes"
+
+        else:
+            print("Invalid input!")
+            print("Please type only 'yes' or 'no'\n")
+
+
+# Main Chatbot Function
+def medical_expert_system():
+
+    print("==== Medical Diagnosis Chatbot ====")
+    print("Please answer with only 'yes' or 'no'\n")
+
+    # Gather symptoms
+    symptoms = {
+
+        'fever': get_answer("Do you have a fever? "),
+
+        'cough': get_answer("Do you have a cough? "),
+
+        'headache': get_answer("Do you have a severe headache? "),
+
+        'sore_throat': get_answer("Do you have a sore throat? ")
+    }
+
+    print("\n==== Diagnosis Result ====")
+
+    # Rule Engine
+    if symptoms['fever'] and symptoms['cough'] and symptoms['sore_throat']:
+
+        print("Diagnosis: You might have Flu or Viral Infection.")
+        print("Advice: Please consult a doctor and take proper rest.")
+
+    elif symptoms['fever'] and symptoms['headache']:
+
+        print("Diagnosis: You might have Viral Fever or Dengue.")
+        print("Advice: Drink plenty of water and monitor temperature.")
+
+    elif symptoms['cough'] and symptoms['sore_throat']:
+
+        print("Diagnosis: You may have Common Cold.")
+        print("Advice: Drink warm fluids and take rest.")
+
+    elif symptoms['headache']:
+
+        print("Diagnosis: You may be experiencing Stress or Migraine.")
+        print("Advice: Relax and get enough sleep.")
+
+    else:
+
+        print("Diagnosis: Symptoms are unclear or mild.")
+        print("Advice: Visit a general physician if needed.")
+
+
+# Function Call
+medical_expert_system()
+
+
+
+
+
+
+
+
+
+# ---------------- ALGORITHM ----------------
+
+# Step 1:
+# Start the program.
+
+# Step 2:
+# Display chatbot title and instructions to the user.
+
+# Step 3:
+# Create a function to accept only 'yes' or 'no' input.
+
+# Step 4:
+# Ask the user medical symptom questions:
+#         - Fever
+#         - Cough
+#         - Headache
+#         - Sore throat
+
+# Step 5:
+# Store all responses in a dictionary.
+
+# Step 6:
+# Apply rule-based conditions using if-elif-else:
+#         - If fever, cough, and sore throat are present,
+#           suggest Flu or Viral Infection.
+#
+#         - If fever and headache are present,
+#           suggest Viral Fever or Dengue.
+#
+#         - If cough and sore throat are present,
+#           suggest Common Cold.
+#
+#         - If only headache is present,
+#           suggest Stress or Migraine.
+#
+#         - Otherwise display unclear symptoms message.
+
+# Step 7:
+# Display diagnosis and advice.
+
+# Step 8:
+# End the program.
+
+
+
+# ---------------- THEORY ----------------
+
+# Title:
+# Elementary Medical Diagnosis Chatbot
+
+# Introduction:
+# A chatbot is a computer program designed to simulate
+# conversation with users. Chatbots are commonly used in
+# customer service, healthcare, banking, shopping websites,
+# and educational systems.
+
+# This project implements a simple rule-based medical chatbot
+# using Python programming language.
+
+# The chatbot interacts with users by asking questions
+# related to symptoms such as fever, cough, headache,
+# and sore throat.
+
+# Based on the user's responses, the chatbot uses
+# predefined rules and decision-making statements
+# to provide a simple diagnosis and health advice.
+
+# This chatbot is called a rule-based chatbot because
+# it works on fixed conditions written using if-elif-else.
+
+# The program also performs input validation to ensure
+# that users enter only valid responses such as 'yes'
+# or 'no'.
+
+# Features of the Chatbot:
+# 1. User-friendly interaction
+# 2. Simple medical diagnosis
+# 3. Input validation
+# 4. Rule-based decision making
+# 5. Beginner-friendly implementation
+
+# Technologies Used:
+# - Python
+# - Functions
+# - Dictionary
+# - Conditional Statements
+# - Loops
+
+# Advantages:
+# 1. Easy to understand and implement
+# 2. Reduces manual interaction
+# 3. Fast response generation
+# 4. Useful for basic healthcare guidance
+
+# Limitations:
+# 1. Cannot replace real doctors
+# 2. Works only for predefined symptoms
+# 3. Cannot understand complex language
+
+# Applications:
+# 1. Healthcare assistance
+# 2. Customer support systems
+# 3. Educational chatbot systems
+# 4. Online help desk systems
+
+# Conclusion:
+# The medical diagnosis chatbot is a simple AI-based
+# application that demonstrates customer interaction
+# using predefined rules. It helps users receive
+# quick guidance based on symptoms and shows how
+# chatbots can automate basic communication tasks.
+
+
+
+# ---------------- VIVA QUESTIONS ----------------
+
+# Q1. What is a chatbot?
+# A chatbot is a software application that interacts
+# with users automatically using text or voice communication.
+
+# Q2. Which type of chatbot is implemented in this project?
+# Rule-based chatbot.
+
+# Q3. Why is this chatbot called rule-based?
+# Because it uses predefined rules and conditions
+# written using if-elif-else statements.
+
+# Q4. Which programming language is used?
+# Python programming language.
+
+# Q5. Why is Python preferred for AI applications?
+# Python is simple, readable, and provides many
+# libraries for AI and machine learning.
+
+# Q6. What is the use of a while loop in this project?
+# The while loop is used to repeatedly ask for input
+# until the user enters valid data.
+
+# Q7. What is input validation?
+# Input validation is the process of checking whether
+# the entered data is correct and acceptable.
+
+# Q8. Why is input validation important?
+# It prevents invalid or unexpected inputs
+# and improves program reliability.
+
+# Q9. What is the purpose of strip().lower()?
+# strip() removes unwanted spaces and lower()
+# converts the text into lowercase letters.
+
+# Q10. Which data structure is used in the program?
+# Dictionary data structure.
+
+# Q11. Why is dictionary used?
+# Dictionary is used to store symptoms and
+# their corresponding values together.
+
+# Q12. What is the role of if-elif-else?
+# It is used for decision making in the program.
+
+# Q13. What is an expert system?
+# An expert system is an AI-based system that
+# makes decisions using predefined knowledge and rules.
+
+# Q14. What are the limitations of this chatbot?
+# It cannot understand complex medical conditions
+# and works only on predefined rules.
+
+# Q15. What are the real-world applications of chatbots?
+# Healthcare, banking, e-commerce, customer support,
+# education, and online services.

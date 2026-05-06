@@ -1,0 +1,349 @@
+# A* Algorithm for Wumpus World (Dynamic Grid)
+
+# Function for safe input
+
+def get_position(message, size):
+
+    while True:
+
+        value = int(input(message))
+
+        # Negative check
+        if value < 0:
+
+            print("Negative values not allowed")
+
+        # Range check
+        elif value >= size:
+
+            print("Value out of range")
+
+        else:
+            return value
+
+
+# Heuristic Function
+# Manhattan Distance
+
+def heuristic(current, goal):
+
+    x1 = current[0]
+    y1 = current[1]
+
+    x2 = goal[0]
+    y2 = goal[1]
+
+    return abs(x1 - x2) + abs(y1 - y2)
+
+
+# Grid Size
+
+size = int(input("Enter Grid Size : "))
+
+# Create Empty Grid
+
+grid = []
+
+for i in range(size):
+
+    row = []
+
+    for j in range(size):
+
+        row.append(' ')
+
+    grid.append(row)
+
+
+# Start and Goal
+
+start = (0, 0)
+goal = (size - 1, size - 1)
+
+grid[0][0] = 'S'
+grid[size - 1][size - 1] = 'G'
+
+
+# Pit Position
+
+while True:
+
+    pit_row = get_position("Enter Pit Row : ", size)
+    pit_col = get_position("Enter Pit Col : ", size)
+
+    # Prevent overlap with Start and Goal
+
+    if (pit_row, pit_col) == start:
+
+        print("Pit cannot be placed at Start")
+
+    elif (pit_row, pit_col) == goal:
+
+        print("Pit cannot be placed at Goal")
+
+    else:
+
+        grid[pit_row][pit_col] = 'P'
+        break
+
+
+# Wumpus Position
+
+while True:
+
+    w_row = get_position("Enter Wumpus Row : ", size)
+    w_col = get_position("Enter Wumpus Col : ", size)
+
+    # Prevent overlap
+
+    if (w_row, w_col) == start:
+
+        print("Wumpus cannot be placed at Start")
+
+    elif (w_row, w_col) == goal:
+
+        print("Wumpus cannot be placed at Goal")
+
+    elif grid[w_row][w_col] == 'P':
+
+        print("Wumpus cannot be placed on Pit")
+
+    else:
+
+        grid[w_row][w_col] = 'W'
+        break
+
+
+# Display Grid
+
+print("\nGrid :")
+
+for row in grid:
+    print(row)
+
+
+# A* Algorithm
+
+open_list = []
+visited = []
+
+# (f value, current position, path)
+
+open_list.append((0, start, [start]))
+
+
+while len(open_list) > 0:
+
+    # Sort according to minimum f(n)
+
+    open_list.sort()
+
+    current_node = open_list.pop(0)
+
+    f = current_node[0]
+    current_position = current_node[1]
+    path = current_node[2]
+
+    # Goal Check
+
+    if current_position == goal:
+
+        print("\nGold Found")
+        print("Safe Path : ")
+
+        for p in path:
+            print(p)
+
+        break
+
+
+    # Visit once
+
+    if current_position not in visited:
+
+        visited.append(current_position)
+
+        row = current_position[0]
+        col = current_position[1]
+
+        # Possible Movements
+
+        neighbours = [
+
+            (row - 1, col),   # Up
+            (row + 1, col),   # Down
+            (row, col - 1),   # Left
+            (row, col + 1)    # Right
+        ]
+
+
+        for next_position in neighbours:
+
+            r = next_position[0]
+            c = next_position[1]
+
+            # Boundary Check
+
+            if r >= 0 and r < size and c >= 0 and c < size:
+
+                # Avoid Pit and Wumpus
+
+                if grid[r][c] != 'P' and grid[r][c] != 'W':
+
+                    # g(n) = path cost
+                    g = len(path)
+
+                    # h(n) = heuristic value
+                    h = heuristic(next_position, goal)
+
+                    # f(n) = g(n) + h(n)
+
+                    f = g + h
+
+                    new_path = path + [next_position]
+
+                    open_list.append((f, next_position, new_path))
+
+
+else:
+
+    print("\nNo Safe Path Found")
+
+
+
+
+
+
+
+
+
+
+
+
+# THEORY
+
+# Aim:
+# To implement A* Search Algorithm for Wumpus World Game in Python.
+
+# A* (A-Star) is an informed search algorithm
+# used to find the shortest path between
+# start node and goal node.
+
+# Formula used in A* :
+
+# f(n) = g(n) + h(n)
+
+# Where:
+# g(n) = actual distance from start node
+# h(n) = estimated distance to goal
+# f(n) = total cost
+
+# Heuristic used:
+# Manhattan Distance
+
+# h(n) = |x1 - x2| + |y1 - y2|
+
+# Wumpus World contains:
+# 1) Agent / Player
+# 2) Pit
+# 3) Wumpus
+# 4) Gold
+
+# Breeze indicates nearby Pit.
+
+# Objective:
+# Reach Gold safely while avoiding Pit and Wumpus.
+
+
+
+# VIVA QUESTIONS AND ANSWERS
+
+# 1) What is A* Algorithm?
+# A* is an informed search algorithm used
+# to find shortest path.
+
+# 2) Why is A* called informed search?
+# Because it uses heuristic information.
+
+# 3) What is heuristic function?
+# It estimates distance from current node
+# to goal node.
+
+# 4) Which heuristic is used?
+# Manhattan Distance.
+
+# 5) Formula of Manhattan Distance
+
+# h(n) = |x1 - x2| + |y1 - y2|
+
+# 6) What is f(n)?
+
+# f(n) = g(n) + h(n)
+
+# 7) What is g(n)?
+# Actual cost from start node.
+
+# 8) What is h(n)?
+# Estimated cost to goal node.
+
+# 9) What does abs() mean?
+# abs() means absolute value.
+# It converts negative value into positive.
+
+# Example:
+# abs(-5) = 5
+
+# 10) What is Breeze?
+# Breeze indicates Pit is nearby.
+
+# 11) What is Wumpus?
+# Wumpus is a dangerous monster.
+
+# 12) What is the goal of Wumpus World?
+# To safely reach Gold.
+
+# 13) What is open_list?
+# Stores nodes to be explored.
+
+# 14) What is visited list?
+# Stores already visited nodes.
+
+# 15) Why boundary checking is used?
+# To avoid index out of range error.
+
+# 16) Why is A* better than BFS?
+# A* is faster because it uses heuristic.
+
+# 17) What happens if no safe path exists?
+# Program prints:
+# No Safe Path Found
+
+# 18) Time Complexity of A*
+
+# O(b^d)
+
+# b = branching factor
+# d = depth of solution
+
+
+
+#IF You need to addd breeze around the pit use  the following code:
+
+# directions = [
+
+#     (-1, 0),
+#     (1, 0),
+#     (0, -1),
+#     (0, 1)
+# ]
+
+# for d in directions:
+
+#     nr = pit_row + d[0]
+#     nc = pit_col + d[1]
+
+#     if nr >= 0 and nr < size and nc >= 0 and nc < size:
+
+#         if grid[nr][nc] == ' ':
+
+#             grid[nr][nc] = 'B'
