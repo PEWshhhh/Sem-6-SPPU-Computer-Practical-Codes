@@ -1,27 +1,92 @@
-n = int(input("Enter Number of Nodes:"))
-e = int(input("Enter Number of edges:"))
-graph =[]
-visited=[]
+n = int(input("Enter Number of Nodes: "))
+
+while n <= 0 or n > 100:
+    n = int(input("Enter Nodes between 1 and 100: "))
+
+e = int(input("Enter Number of Edges: "))
+
+while e < 0:
+    e = int(input("Enter Valid Number of Edges: "))
+
+graph = []
+visited = []
 
 for i in range(n):
-    row=[0]*n
+    row = [0] * n
     graph.append(row)
 
 for i in range(e):
-    u = int(input("Enter First node that is connected:"))
-    v = int(input("Enter Second node that is connected:"))
-    graph[u][v] = 1
-    graph[v][u] = 1
 
-visited = [0]*n
+    u = int(input("Enter First node that is connected: "))
+    v = int(input("Enter Second node that is connected: "))
+
+    if u >= 0 and u < n and v >= 0 and v < n:
+        graph[u][v] = 1
+        graph[v][u] = 1
+
 
 def dfs(node):
-    visited[node]=1
-    print(node, end=" ")
-    for i in range(n):
-        if (graph[node][i]==1 and visited[i]==0):
-            dfs(i)
-    
-start = int(input("Enter start node"))
-dfs(start)
 
+    visited[node] = 1
+    print(node, end=" ")
+
+    for i in range(n):
+
+        if graph[node][i] == 1 and visited[i] == 0:
+            dfs(i)
+
+
+def bfs(start):
+
+    queue = []
+    visited[start] = 1
+    queue.append(start)
+
+    while len(queue) != 0:
+        current = queue[0]
+        queue.pop(0)
+        print(current, end=" ")
+
+        for i in range(n):
+            if graph[current][i] == 1:
+                if visited[i] == 0:
+                    visited[i] = 1
+                    queue.append(i)
+
+while True:
+
+    print("\n1. DFS")
+    print("2. BFS")
+    print("3. Exit")
+
+    choice = int(input("Enter Choice: "))
+
+    if choice == 1:
+
+        visited = [0] * n
+
+        start = int(input("Enter Start Node: "))
+
+        if start >= 0 and start < n:
+            print("DFS Traversal:")
+            dfs(start)
+        else:
+            print("Invalid Start Node")
+
+    elif choice == 2:
+
+        visited = [0] * n
+
+        start = int(input("Enter Start Node: "))
+
+        if start >= 0 and start < n:
+            print("BFS Traversal:")
+            bfs(start)
+        else:
+            print("Invalid Start Node")
+
+    elif choice == 3:
+        break
+
+    else:
+        print("Invalid Choice")
