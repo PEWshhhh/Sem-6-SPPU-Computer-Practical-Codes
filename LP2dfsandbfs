@@ -1,0 +1,27 @@
+n = int(input("Enter Number of Nodes:"))
+e = int(input("Enter Number of edges:"))
+graph =[]
+visited=[]
+
+for i in range(n):
+    row=[0]*n
+    graph.append(row)
+
+for i in range(e):
+    u = int(input("Enter First node that is connected:"))
+    v = int(input("Enter Second node that is connected:"))
+    graph[u][v] = 1
+    graph[v][u] = 1
+
+visited = [0]*n
+
+def dfs(node):
+    visited[node]=1
+    print(node, end=" ")
+    for i in range(n):
+        if (graph[node][i]==1 and visited[i]==0):
+            dfs(i)
+    
+start = int(input("Enter start node"))
+dfs(start)
+
