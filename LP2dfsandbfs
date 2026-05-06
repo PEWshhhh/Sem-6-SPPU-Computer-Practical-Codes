@@ -101,56 +101,261 @@ while True:
 
         
 
-#         /*
-# THEORY
+# #         /*
+# /*
+# ================ THEORY =================
 
-# Bubble Sort is a simple sorting algorithm.
-# It compares adjacent elements and swaps them if they are in the wrong order.
+# Depth First Search (DFS) and Breadth First Search (BFS)
+# are graph traversal algorithms used to visit all vertices
+# of a graph systematically.
 
-# Largest elements move towards the end in every pass,
-# similar to bubbles rising upward.
+# A graph consists of:
+# 1. Vertices (nodes)
+# 2. Edges (connections)
 
-# Time Complexity:
-# O(n²)
+# In this program:
+# - An undirected graph is used.
+# - The graph is represented using an adjacency matrix.
+# - The user provides:
+#     • Number of nodes
+#     • Number of edges
+#     • Connections between nodes
 
-# Advantages:
-# 1. Easy to understand
-# 2. Easy to implement
+# Adjacency Matrix:
+# A 2D matrix is used to represent graph connections.
 
-# Disadvantages:
-# 1. Slow for large datasets
-# 2. More comparisons and swaps
+# If graph[u][v] = 1:
+# it means node u is connected to node v.
+
+# Since the graph is undirected:
+# graph[u][v] = 1
+# graph[v][u] = 1
+
+# Both directions are stored.
+
+# Example:
+
+# 0 — 1
+# |
+# 2
+
+# Matrix Representation:
+
+#    0 1 2
+# 0 [0 1 1]
+# 1 [1 0 0]
+# 2 [1 0 0]
 
 
-# VIVA QUESTIONS AND ANSWERS
+# ================ DFS THEORY =================
 
-# 1) What is Bubble Sort?
-# Bubble Sort is a sorting technique that repeatedly compares and swaps adjacent elements.
+# DFS stands for Depth First Search.
 
-# 2) Why is it called Bubble Sort?
-# Because larger elements move to the end like bubbles rising in water.
+# DFS explores a graph by going as deep as possible
+# before backtracking.
 
-# 3) What is the time complexity of Bubble Sort?
-# O(n²)
+# Working of DFS:
+# 1. Start from a node
+# 2. Mark it visited
+# 3. Visit one connected unvisited node
+# 4. Continue recursively
+# 5. If no node remains, backtrack
 
-# 4) Is Bubble Sort stable?
-# Yes, Bubble Sort is a stable sorting algorithm.
+# DFS uses:
+# - Recursion
+# - Stack internally
 
-# 5) Which concept is used in Bubble Sort?
-# Swapping of adjacent elements using loops.
+# In this program:
+# visited[] array prevents revisiting nodes.
 
-# 6) What is the role of temp variable?
-# It temporarily stores a value during swapping.
+# DFS Traversal Example:
 
-# 7) How many loops are used in Bubble Sort?
-# Two nested loops.
+# Graph:
 
-# 8) Which language is used here?
-# Apex language in Salesforce.
+# 0 — 1
+# |
+# 2 — 3
 
-# 9) What is List<Integer> in Apex?
-# It is a collection used to store integer values.
+# DFS starting from 0:
 
-# 10) What does System.debug do?
-# It prints output in Salesforce debug logs.
+# 0 → 1 → back → 2 → 3
+
+# Traversal Output:
+# 0 1 2 3
+
+# Advantages of DFS:
+# 1. Simple recursive implementation
+# 2. Uses less memory than BFS
+# 3. Useful for path exploration
+
+# Disadvantages of DFS:
+# 1. Does not guarantee shortest path
+# 2. Can go very deep
+# 3. Recursive depth may increase
+
+
+# ================ BFS THEORY =================
+
+# BFS stands for Breadth First Search.
+
+# BFS explores nodes level by level.
+
+# Working of BFS:
+# 1. Start from a node
+# 2. Add node into queue
+# 3. Remove first node from queue
+# 4. Visit all connected unvisited nodes
+# 5. Add those nodes into queue
+# 6. Repeat until queue becomes empty
+
+# BFS uses:
+# - Queue
+# - FIFO (First In First Out)
+
+# In this program:
+# queue list is used as queue.
+
+# BFS Traversal Example:
+
+# Graph:
+
+#       0
+#      / \
+#     1   2
+#    /
+#   3
+
+# BFS starting from 0:
+
+# Level 1:
+# 0
+
+# Level 2:
+# 1 2
+
+# Level 3:
+# 3
+
+# Traversal Output:
+# 0 1 2 3
+
+# Advantages of BFS:
+# 1. Finds shortest path in unweighted graph
+# 2. Explores nearby nodes first
+# 3. Good for level-wise traversal
+
+# Disadvantages of BFS:
+# 1. Uses more memory
+# 2. Queue size may become large
+
+
+# ================ ALGORITHM FOR DFS =================
+
+# 1. Read number of nodes and edges
+# 2. Create adjacency matrix
+# 3. Store graph connections
+# 4. Create visited array initialized with 0
+# 5. Take starting node
+# 6. Mark current node visited
+# 7. Print current node
+# 8. Check all adjacent nodes
+# 9. If connected and unvisited:
+#       recursively call DFS
+# 10. Repeat until all reachable nodes are visited
+
+
+# ================ ALGORITHM FOR BFS =================
+
+# 1. Read number of nodes and edges
+# 2. Create adjacency matrix
+# 3. Store graph connections
+# 4. Create visited array initialized with 0
+# 5. Create empty queue
+# 6. Take starting node
+# 7. Mark start node visited
+# 8. Insert start node into queue
+# 9. While queue is not empty:
+#       a) Remove front node
+#       b) Print node
+#       c) Check adjacent nodes
+#       d) If connected and unvisited:
+#             mark visited
+#             insert into queue
+# 10. Repeat until queue becomes empty
+
+
+# ================ TIME COMPLEXITY =================
+
+# DFS Time Complexity:
+# O(V + E)
+
+# BFS Time Complexity:
+# O(V + E)
+
+# Where:
+# V = Number of Vertices
+# E = Number of Edges
+
+
+# ================ VIVA QUESTIONS =================
+
+# Q1. What is a graph?
+# A graph is a data structure consisting of vertices and edges.
+
+# Q2. What is an undirected graph?
+# In an undirected graph, connections work in both directions.
+
+# Q3. What is DFS?
+# DFS is a traversal algorithm that explores deeply before backtracking.
+
+# Q4. What is BFS?
+# BFS is a traversal algorithm that explores level by level.
+
+# Q5. Which data structure is used in DFS?
+# Stack or recursion.
+
+# Q6. Which data structure is used in BFS?
+# Queue.
+
+# Q7. What is an adjacency matrix?
+# It is a 2D matrix used to represent graph connections.
+
+# Q8. Why is visited array used?
+# To prevent revisiting nodes and infinite loops.
+
+# Q9. Which traversal gives shortest path?
+# BFS in unweighted graphs.
+
+# Q10. Which traversal uses recursion?
+# DFS.
+
+# Q11. What is backtracking in DFS?
+# Returning to previous node when no further node exists.
+
+# Q12. What is FIFO?
+# First In First Out.
+
+# Q13. What is LIFO?
+# Last In First Out.
+
+# Q14. What is the limitation of adjacency matrix?
+# High memory usage for large graphs.
+
+# Q15. Which is better for large graphs?
+# Adjacency list.
+
+# Q16. Why is graph[v][u] also set to 1?
+# Because the graph is undirected.
+
+# Q17. What happens if visited array is not used?
+# Traversal may enter infinite loops.
+
+# Q18. Which traversal uses more memory?
+# BFS.
+
+# Q19. Can DFS guarantee shortest path?
+# No.
+
+# Q20. Why is BFS called level-order traversal?
+# Because it visits nodes level by level.
 # */
