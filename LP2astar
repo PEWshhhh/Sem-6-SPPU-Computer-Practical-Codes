@@ -220,130 +220,327 @@ else:
 
 
 
-# THEORY
+# ---------------- THEORY ----------------
 
-# Aim:
-# To implement A* Search Algorithm for Wumpus World Game in Python.
+# Artificial Intelligence uses search algorithms
+# to solve path finding and decision making problems.
 
-# A* (A-Star) is an informed search algorithm
-# used to find the shortest path between
-# start node and goal node.
+# A* (A-Star) Algorithm is one of the most popular
+# informed search algorithms.
 
-# Formula used in A* :
+# It is used to find the shortest and safest path
+# from start node to goal node.
+
+# A* combines:
+# 1) Actual path cost
+# 2) Estimated future cost
+
+# Formula used in A*:
 
 # f(n) = g(n) + h(n)
 
 # Where:
-# g(n) = actual distance from start node
-# h(n) = estimated distance to goal
-# f(n) = total cost
+# g(n) = Actual distance travelled from start node
+# h(n) = Estimated distance from current node to goal
+# f(n) = Total estimated cost
 
-# Heuristic used:
-# Manhattan Distance
+# The node having smallest f(n) value
+# is selected first.
+
+# In this program:
+# S = Start Position
+# G = Gold / Goal
+# P = Pit
+# W = Wumpus
+# B = Breeze
+
+# Pit and Wumpus are dangerous cells.
+# The agent should avoid these cells.
+
+# Breeze is an indicator that Pit is nearby.
+
+# This program uses Manhattan Distance
+# as heuristic function.
+
+# Manhattan Distance Formula:
 
 # h(n) = |x1 - x2| + |y1 - y2|
 
-# Wumpus World contains:
-# 1) Agent / Player
-# 2) Pit
-# 3) Wumpus
-# 4) Gold
+# This heuristic is suitable because
+# movement is allowed only in:
+# Up, Down, Left and Right directions.
 
-# Breeze indicates nearby Pit.
+# Diagonal movement is not allowed.
 
-# Objective:
-# Reach Gold safely while avoiding Pit and Wumpus.
-
+# The objective of this program is:
+# To safely reach Gold while avoiding
+# Pit and Wumpus.
 
 
-# VIVA QUESTIONS AND ANSWERS
+
+# ---------------- ALGORITHM ----------------
+
+# Step 1:
+# Start the program.
+
+# Step 2:
+# Take grid size from user.
+
+# Step 3:
+# Create an empty grid of size N x N.
+
+# Step 4:
+# Place Start node at (0,0).
+
+# Step 5:
+# Place Goal node at (size-1, size-1).
+
+# Step 6:
+# Take Pit position from user.
+
+# Step 7:
+# Take Wumpus position from user.
+
+# Step 8:
+# Validate user input:
+# - No negative values
+# - Values should be inside range
+# - Pit and Wumpus should not overlap
+# - Pit/Wumpus should not be placed on Start or Goal
+
+# Step 9:
+# Display the grid.
+
+# Step 10:
+# Add starting node to open_list.
+
+# Step 11:
+# Repeat until open_list becomes empty:
+#   a) Sort open_list
+#   b) Select node with minimum f(n)
+#   c) Check if goal reached
+#   d) Generate neighbour nodes
+#   e) Ignore invalid and dangerous cells
+#   f) Calculate:
+#        g(n)
+#        h(n)
+#        f(n)
+#   g) Add valid neighbours to open_list
+
+# Step 12:
+# If goal reached:
+# Print safe path.
+
+# Step 13:
+# Otherwise print:
+# No Safe Path Found
+
+# Step 14:
+# Stop the program.
+
+
+
+# ---------------- UNDERSTANDING OF CODE ----------------
+
+# Function: get_position()
+
+# This function is used to safely take input
+# from user.
+
+# It prevents:
+# 1) Negative values
+# 2) Values outside grid range
+
+# If invalid input is entered,
+# user is asked again.
+
+
+
+# Function: heuristic()
+
+# This function calculates Manhattan Distance.
+
+# Example:
+
+# Current Position = (1,2)
+# Goal Position = (3,3)
+
+# h(n) = |1 - 3| + |2 - 3|
+
+# h(n) = 2 + 1
+
+# h(n) = 3
+
+# This means approximately
+# 3 moves are required to reach goal.
+
+
+
+# Grid Creation
+
+# Empty grid is created using nested loops.
+
+# Example for 3x3 grid:
+
+# [
+#   [' ', ' ', ' '],
+#   [' ', ' ', ' '],
+#   [' ', ' ', ' ']
+# ]
+
+
+
+# Start and Goal
+
+# Start position:
+# (0,0)
+
+# Goal position:
+# (size-1, size-1)
+
+
+
+# open_list
+
+# open_list stores nodes that
+# need to be explored.
+
+# Format:
+
+# (f_value, current_position, path)
+
+
+
+# visited list
+
+# visited stores already explored nodes.
+
+# This prevents revisiting same node.
+
+
+
+# Sorting of open_list
+
+# open_list.sort()
+
+# Node with smallest f(n)
+# comes at first position.
+
+# This is the main idea of A*.
+
+
+
+# Neighbour Generation
+
+# Four possible movements:
+
+# Up
+# Down
+# Left
+# Right
+
+# Example:
+
+# (row - 1, col) -> Up
+# (row + 1, col) -> Down
+# (row, col - 1) -> Left
+# (row, col + 1) -> Right
+
+
+
+# Boundary Checking
+
+# Prevents index out of range error.
+
+# Example:
+# Row and column should remain inside grid.
+
+
+
+# Dangerous Cell Checking
+
+# Program ignores:
+# P = Pit
+# W = Wumpus
+
+# This helps in finding safe path.
+
+
+
+# Path Cost Calculation
+
+# g(n) = length of path travelled
+
+# h(n) = heuristic value
+
+# f(n) = g(n) + h(n)
+
+
+
+# Goal Checking
+
+# If current position becomes equal to goal,
+# safe path is printed.
+
+
+
+# If no path exists
+
+# Program prints:
+# No Safe Path Found
+
+
+
+# ---------------- VIVA QUESTIONS ----------------
 
 # 1) What is A* Algorithm?
-# A* is an informed search algorithm used
-# to find shortest path.
+# A* is an informed search algorithm
+# used to find shortest path.
 
 # 2) Why is A* called informed search?
 # Because it uses heuristic information.
 
 # 3) What is heuristic function?
-# It estimates distance from current node
-# to goal node.
+# It estimates remaining distance to goal.
 
 # 4) Which heuristic is used?
 # Manhattan Distance.
 
-# 5) Formula of Manhattan Distance
+# 5) What is Manhattan Distance?
+# Distance calculated using only
+# horizontal and vertical movement.
 
-# h(n) = |x1 - x2| + |y1 - y2|
-
-# 6) What is f(n)?
-
-# f(n) = g(n) + h(n)
-
-# 7) What is g(n)?
-# Actual cost from start node.
-
-# 8) What is h(n)?
-# Estimated cost to goal node.
-
-# 9) What does abs() mean?
+# 6) What does abs() mean?
 # abs() means absolute value.
-# It converts negative value into positive.
 
 # Example:
 # abs(-5) = 5
 
-# 10) What is Breeze?
-# Breeze indicates Pit is nearby.
-
-# 11) What is Wumpus?
-# Wumpus is a dangerous monster.
-
-# 12) What is the goal of Wumpus World?
-# To safely reach Gold.
-
-# 13) What is open_list?
+# 7) What is open_list?
 # Stores nodes to be explored.
 
-# 14) What is visited list?
-# Stores already visited nodes.
+# 8) What is visited list?
+# Stores already explored nodes.
 
-# 15) Why boundary checking is used?
+# 9) What is Breeze?
+# Breeze indicates nearby Pit.
+
+# 10) What is Wumpus?
+# Wumpus is a dangerous monster.
+
+# 11) Why boundary checking is used?
 # To avoid index out of range error.
 
-# 16) Why is A* better than BFS?
-# A* is faster because it uses heuristic.
+# 12) What is objective of Wumpus World?
+# Reach Gold safely.
 
-# 17) What happens if no safe path exists?
-# Program prints:
-# No Safe Path Found
+# 13) Why is A* better than BFS?
+# A* uses heuristic information
+# and reaches goal faster.
 
-# 18) Time Complexity of A*
+# 14) Time Complexity of A*
 
 # O(b^d)
 
 # b = branching factor
 # d = depth of solution
-
-
-
-#IF You need to addd breeze around the pit use  the following code:
-
-# directions = [
-
-#     (-1, 0),
-#     (1, 0),
-#     (0, -1),
-#     (0, 1)
-# ]
-
-# for d in directions:
-
-#     nr = pit_row + d[0]
-#     nc = pit_col + d[1]
-
-#     if nr >= 0 and nr < size and nc >= 0 and nc < size:
-
-#         if grid[nr][nc] == ' ':
-
-#             grid[nr][nc] = 'B'
