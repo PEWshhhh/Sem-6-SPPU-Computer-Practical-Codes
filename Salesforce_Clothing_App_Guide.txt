@@ -1,0 +1,170 @@
+
+SALESFORCE TRAILHEAD CLOTHING APP GUIDE
+
+STEP 1 — Create Salesforce Trailhead Account
+1. Go to Trailhead
+2. Create account
+3. Open Playground
+
+STEP 2 — Open Setup
+1. Click gear icon
+2. Click Setup
+
+STEP 3 — Create Custom Object
+Object Manager → Create → Custom Object
+
+Label: Clothing Product
+Plural Label: Clothing Products
+Record Name: Product Name
+Data Type: Text
+
+Save.
+
+STEP 4 — Create Fields
+
+A) Price Field
+Type: Currency
+
+B) Size Field
+Type: Picklist
+Values:
+S
+M
+L
+XL
+XXL
+
+C) Stock Field
+Type: Number
+
+D) Brand Field
+Type: Text
+
+STEP 5 — Create Tab
+Setup → Tabs → New
+Select Clothing Product
+
+STEP 6 — Create App
+App Manager → New Lightning App
+
+App Name:
+Clothing Store
+
+Add Navigation Item:
+Clothing Products
+
+STEP 7 — Open App
+Use App Launcher (9 dots)
+Search:
+Clothing Store
+
+STEP 8 — Add Products
+
+Example Products:
+
+1.
+Product Name: Black Hoodie
+Price: 1499
+Size: XL
+Stock: 20
+Brand: Nike
+
+2.
+Product Name: Running Shoes
+Price: 3499
+Size: XXL
+Stock: 12
+Brand: Adidas
+
+3.
+Product Name: Leather Jacket
+Price: 4999
+Size: XL
+Stock: 5
+Brand: Woodland
+
+STEP 9 — Add Category Field
+
+Create Picklist Field:
+Category
+
+Values:
+Hoodie
+Shoes
+Jacket
+T-Shirt
+Cargo
+Sweatpants
+
+UPDATE PRODUCTS WITH CATEGORY
+
+1. Open Clothing Products
+2. Open product
+3. Click Edit
+4. Find Category field
+5. Select category
+6. Save
+
+Example:
+Black Hoodie → Hoodie
+Running Shoes → Shoes
+Leather Jacket → Jacket
+
+REPORTS
+
+1. App Launcher → Reports
+2. New Report
+3. Choose Clothing Product
+4. Start Report
+
+ADD FIELDS TO REPORT
+
+Click Add Column:
+- Product Name
+- Brand
+- Price
+- Stock
+- Category
+
+GROUP REPORT
+
+Drag Brand into Group Rows
+
+Save Report:
+Products by Brand
+
+DASHBOARDS
+
+1. App Launcher → Dashboards
+2. New Dashboard
+
+Name:
+Clothing Analytics
+
+ADD CHARTS
+
+1. Open Dashboard
+2. Click Edit
+3. Click + Component
+4. Select Report:
+Products by Brand
+5. Choose Pie Chart
+6. Click Add
+7. Save Dashboard
+
+VIVA QUESTIONS
+
+1. What is a Custom Object?
+A user-created database table in Salesforce.
+
+2. What is a Field?
+A column storing information.
+
+3. What is a Record?
+One row/data entry.
+
+4. What is a Report?
+A filtered and organized data view.
+
+5. What is a Dashboard?
+A graphical representation of reports.
