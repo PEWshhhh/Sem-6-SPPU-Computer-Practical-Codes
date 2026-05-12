@@ -1,0 +1,123 @@
+---------------- APACHE SPARK USING SCALA ----------------
+
+WHAT IS APACHE SPARK?
+Apache Spark is an open-source distributed data processing framework
+used for big data analytics. It processes large datasets quickly
+using in-memory computation.
+
+WHAT IS SCALA?
+Scala is a programming language commonly used with Apache Spark.
+
+SOFTWARE REQUIRED:
+1) Java JDK
+2) Scala
+3) Apache Spark
+
+----------------------------------------------------------
+STEP 1 — INSTALL JAVA
+----------------------------------------------------------
+
+1. Download and install JDK 8 or JDK 11.
+
+2. After installation, open Command Prompt and run:
+
+java -version
+
+3. If Java is installed correctly, version information will appear.
+
+----------------------------------------------------------
+STEP 2 — INSTALL SCALA
+----------------------------------------------------------
+
+1. Download Scala from:
+https://www.scala-lang.org/
+
+2. Install Scala.
+
+3. Verify installation using:
+
+scala -version
+
+----------------------------------------------------------
+STEP 3 — INSTALL APACHE SPARK
+----------------------------------------------------------
+
+1. Download Apache Spark.
+
+2. Choose:
+Pre-built for Apache Hadoop
+
+3. Extract Spark folder.
+
+Example:
+D:\Spark
+
+----------------------------------------------------------
+STEP 4 — SET ENVIRONMENT VARIABLES
+----------------------------------------------------------
+
+Add the following folders to PATH:
+
+1. Scala/bin
+2. Spark/bin
+
+----------------------------------------------------------
+STEP 5 — VERIFY SPARK
+----------------------------------------------------------
+
+Open Command Prompt and run:
+
+spark-shell
+
+If installed correctly, Spark Scala shell will open.
+
+----------------------------------------------------------
+SIMPLE SCALA PROGRAM
+----------------------------------------------------------
+
+object HelloSpark {
+
+    def main(args: Array[String]) {
+
+        println("Hello Apache Spark")
+
+    }
+
+}
+
+----------------------------------------------------------
+WORD COUNT PROGRAM
+----------------------------------------------------------
+
+object WordCount {
+
+    def main(args: Array[String]) {
+
+        val data = List("hello", "spark", "hello")
+
+        val result = data.groupBy(word => word)
+
+        println(result)
+
+    }
+
+}
+
+----------------------------------------------------------
+IMPORTANT VIVA QUESTIONS
+----------------------------------------------------------
+
+Q1. What is Apache Spark?
+Apache Spark is a distributed big data processing framework.
+
+Q2. Why is Spark faster than Hadoop?
+Spark uses in-memory processing.
+
+Q3. What is Scala?
+Scala is a programming language used with Apache Spark.
+
+Q4. What is distributed processing?
+Processing data using multiple systems simultaneously.
+
+Q5. What is in-memory processing?
+Processing data directly in RAM instead of disk.

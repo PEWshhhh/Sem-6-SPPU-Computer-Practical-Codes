@@ -1,0 +1,6 @@
+INFO System started
+ERROR Disk failure
+WARNING Memory low
+INFO User login
+ERROR Network issue
+INFO Shutdown initiated
